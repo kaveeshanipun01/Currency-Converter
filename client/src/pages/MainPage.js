@@ -1,5 +1,5 @@
-import React ,{useState} from "react";
-
+import React ,{useEffect, useState} from "react";
+import axios from "axios";
 export default function MainPage() {
 
 
@@ -9,15 +9,33 @@ export default function MainPage() {
      const [TargetCurrency, setTargetCurrency] = useState();
      const [amountInSourceCurrency , setAmountInSourceCurrency] = useState(0);
      const [amountInTargetCurrency , setAmountInTargetCurrency] = useState(0);
+     const [ CurrencyNames , steCurrencyNames] = useState([]);
 
   //handle Submit methode
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+      e.preventDefault();
         console.log( 
         date , 
     setSourceCurrency,
      TargetCurrency,
     amountInSourceCurrency,)
  };
+
+ //GET ALL CURRUNCY NAMES
+ useEffect(()=>{
+  const getCurrencyNames = async() => {
+    try{
+      const responce = await axios.get(
+        "http://localhost:5000/getAllCurrencies"
+      );
+      steCurrencyNames(responce.data);
+
+    }catch(err){
+      console.error(err);
+    }
+  };
+  getCurrencyNames();
+ } , [])
 
 
 
@@ -109,7 +127,7 @@ export default function MainPage() {
                   required
                 />
               </div>
-              <button type="bu" className="bg-green-600 hover:bg-green-700 text-white
+              <button  className="bg-green-600 hover:bg-green-700 text-white
                font-midum py-2 px-4 rounded-md">
                 Get The Target Currency</button>
           </form>
