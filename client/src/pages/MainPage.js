@@ -9,16 +9,27 @@ export default function MainPage() {
      const [TargetCurrency, setTargetCurrency] = useState();
      const [amountInSourceCurrency , setAmountInSourceCurrency] = useState(0);
      const [amountInTargetCurrency , setAmountInTargetCurrency] = useState(0);
-     const [ CurrencyNames , steCurrencyNames] = useState([]);
+     const [ CurrencyNames , setCurrencyNames] = useState([]);
 
   //handle Submit methode
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
       e.preventDefault();
-        console.log( 
-        date , 
-    setSourceCurrency,
-     TargetCurrency,
-    amountInSourceCurrency,)
+      try{
+        const responce = await axios.get("http://localhost:5000/convert", {
+          params: {
+            date,
+            SourceCurrency,
+            TargetCurrency,
+            amountInSourceCurrency,
+
+          },
+        });
+
+        //TODO: set the rest.....
+
+      }catch(err){
+        console.error(err);
+      }
  };
 
  //GET ALL CURRUNCY NAMES
@@ -28,9 +39,9 @@ export default function MainPage() {
       const responce = await axios.get(
         "http://localhost:5000/getAllCurrencies"
       );
-      steCurrencyNames(responce.data);
+      setCurrencyNames(responce.data);
 
-    }catch(err){
+    } catch (err) {
       console.error(err);
     }
   };
@@ -88,6 +99,11 @@ export default function MainPage() {
                 id={SourceCurrency}
                 value={SourceCurrency}>
                   <option value="">Select  Source Currency</option>
+                  {Object.keys(CurrencyNames).map((currency)=>(
+                    <option className=" p-1" key={currency} value={currency}> 
+                      {CurrencyNames[currency]}
+                    </option>
+                  ))}
 
                 </select>
 
@@ -107,6 +123,12 @@ export default function MainPage() {
                 id={TargetCurrency}
                 value={TargetCurrency}>
                   <option value="">Select Target Currency</option>
+                  {Object.keys(CurrencyNames).map((currency)=>(
+                    <option className=" p-1" key={currency} value={currency}> 
+                      {CurrencyNames[currency]}
+                    </option>
+                  ))}
+
 
                 </select>
                 </div>
