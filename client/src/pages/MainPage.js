@@ -10,6 +10,7 @@ export default function MainPage() {
      const [amountInSourceCurrency , setAmountInSourceCurrency] = useState(0);
      const [amountInTargetCurrency , setAmountInTargetCurrency] = useState(0);
      const [ CurrencyNames , setCurrencyNames] = useState([]);
+     const [ loading , setLoading] = useState(true);
 
   //handle Submit methode
     const handleSubmit = async(e) => {
@@ -25,10 +26,11 @@ export default function MainPage() {
           },
         });
 
-        //TODO: set the rest.....
+        setAmountInTargetCurrency(responce.data);
+        setLoading(false);
 
       }catch(err){
-        console.error(err);
+      console.error(err);
       }
  };
 
@@ -153,8 +155,17 @@ export default function MainPage() {
                font-midum py-2 px-4 rounded-md">
                 Get The Target Currency</button>
           </form>
+         
+        
         </section>
       </div>
+
+      {!loading ? <section className="lg:mx-60  mt-5 ">
+        {amountInSourceCurrency}{CurrencyNames[SourceCurrency]} is equals to {" "}
+        <span className="text-green-500 font-bold">{amountInTargetCurrency}</span> in {CurrencyNames[TargetCurrency]}
+        </section> : null }
+      
+      
     </div>
   );
 }
