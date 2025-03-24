@@ -1,3 +1,7 @@
+![Screenshot 2025-03-15 204620](https://github.com/user-attachments/assets/0f72419b-fc98-42a3-9cc2-222d262c1863)
+## Currency-Converter
+
+ 
 ## Technologies Used
 - **Frontend**: React, Axios, Tailwind CSS (for styling)
 - **Backend**: Node.js, Express, Axios (for making API calls)
@@ -48,4 +52,3 @@
 - Make sure to replace the placeholder links (like `yourusername/yourrepo.git`) with your actual GitHub repository details.
 - If you have specific styling (as inferred from the Tailwind CSS classes), you could mention the installation of Tailwind CSS for the frontend part.
 
-![Screenshot 2025-03-15 204620](https://github.com/user-attachments/assets/0f72419b-fc98-42a3-9cc2-222d262c1863)
